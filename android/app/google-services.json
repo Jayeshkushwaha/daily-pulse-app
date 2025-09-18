@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "884731318263",
+    "project_id": "daily-pulse-app-f8bff",
+    "storage_bucket": "daily-pulse-app-f8bff.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884731318263:android:38588ef2d1c6f773e8a8f2",
+        "android_client_info": {
+          "package_name": "com.mynewreactnativeapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArkPo3D0DU4ilA7aiY3CcHxXrNI5fzOuk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

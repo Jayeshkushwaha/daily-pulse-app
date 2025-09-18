@@ -1,97 +1,197 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Daily Pulse App
 
-# Getting Started
+A React Native application for daily questionnaires with Firebase authentication and Firestore integration.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+- 🔐 **Firebase Authentication** - Email & Password authentication
+- 📱 **Modern UI** - Dark theme with beautiful design matching the provided mockups
+- 📋 **Dynamic Questionnaires** - Fetch questions from API and render different input types
+- 💾 **Data Persistence** - Save answers to Firebase Firestore
+- 🧭 **Navigation** - Stack and Tab navigation with React Navigation
+- ✅ **Form Validation** - Input validation and error handling
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Screenshots
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+The app includes the following screens:
+- **Login Screen** - Welcome back with email/password login
+- **Signup Screen** - Create account with email/password
+- **Home Screen** - User profile and daily questionnaire card
+- **Profile Screen** - User profile management and settings
+- **Questionnaire Screen** - Dynamic form with text, single choice, and multi-choice questions
 
-```sh
-# Using npm
-npm start
+## Tech Stack
 
-# OR using Yarn
-yarn start
-```
+- **React Native 0.81.4**
+- **TypeScript**
+- **React Navigation 6**
+- **Firebase Authentication**
+- **Firebase Firestore**
+- **React Native Vector Icons**
 
-## Step 2: Build and run your app
+## Installation
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd MyNewReactNativeApp
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **iOS Setup**
+   ```bash
+   cd ios && pod install && cd ..
+   ```
+
+4. **Firebase Setup**
+   
+   **Quick Setup:**
+   ```bash
+   # Follow the detailed guide
+   open FIREBASE_SETUP.md
+   
+   # After downloading config files from Firebase Console, run:
+   ./setup-firebase-config.sh
+   
+   # Verify your setup
+   node verify-firebase-setup.js
+   ```
+   
+   **Manual Setup:**
+   - Create a new Firebase project at [Firebase Console](https://console.firebase.google.com)
+   - Enable Authentication with Email/Password provider
+   - Enable Firestore Database
+   - Download `google-services.json` for Android and place it in `android/app/`
+   - Download `GoogleService-Info.plist` for iOS and place it in `ios/MyNewReactNativeApp/`
+   
+   📖 **See `FIREBASE_SETUP.md` for detailed step-by-step instructions**
+
+## Running the App
 
 ### Android
-
-```sh
-# Using npm
+```bash
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
 ### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+```bash
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Project Structure
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+```
+src/
+├── context/
+│   └── AuthContext.tsx          # Firebase authentication context
+├── navigation/
+│   └── AppNavigator.tsx         # Navigation setup
+└── screens/
+    ├── LoginScreen.tsx          # Login screen
+    ├── SignupScreen.tsx         # Signup screen
+    ├── HomeScreen.tsx           # Home screen with questionnaire card
+    ├── ProfileScreen.tsx        # Profile screen
+    └── QuestionnaireScreen.tsx  # Dynamic questionnaire
+```
 
-## Step 3: Modify your app
+## API Integration
 
-Now that you have successfully run the app, let's make changes!
+The app fetches questions from: `https://dummyjson.com/c/a67f-05a6-4cbd-9a19`
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+Expected API response format:
+```json
+{
+  "questions": [
+    {
+      "id": "1",
+      "question": "How are you feeling today?",
+      "type": "single_choice",
+      "options": ["Great", "Good", "Okay", "Not great"]
+    },
+    {
+      "id": "2",
+      "question": "What activities did you do today?",
+      "type": "multi_choice",
+      "options": ["Exercise", "Work", "Study", "Relax"]
+    },
+    {
+      "id": "3",
+      "question": "Any additional comments?",
+      "type": "text"
+    }
+  ]
+}
+```
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+## Firestore Data Structure
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+Answers are stored in Firestore with the following structure:
+```
+users/{userId}/answers/{date}
+{
+  answers: [
+    {
+      questionId: "1",
+      answer: "Great"
+    },
+    {
+      questionId: "2", 
+      answer: ["Exercise", "Work"]
+    }
+  ],
+  timestamp: serverTimestamp
+}
+```
 
-## Congratulations! :tada:
+## Firebase Configuration
 
-You've successfully run and modified your React Native App. :partying_face:
+Make sure to:
+1. Replace the placeholder Firebase configuration files with your actual project files
+2. Update the package name/bundle ID to match your Firebase project
+3. Enable Authentication and Firestore in your Firebase console
 
-### Now what?
+## Development
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+### Adding New Question Types
 
-# Troubleshooting
+To add new question types, modify the `renderQuestion` function in `QuestionnaireScreen.tsx` and add the corresponding UI components.
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+### Customizing Themes
 
-# Learn More
+The app uses a dark theme. Colors and styles can be modified in the respective screen files. Main colors used:
+- Background: `#111827`
+- Cards: `#1f2937`
+- Inputs: `#374151`
+- Primary: `#4ade80`
+- Text: `#ffffff`
 
-To learn more about React Native, take a look at the following resources:
+## Troubleshooting
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+1. **Build issues**: Clean and rebuild
+   ```bash
+   cd android && ./gradlew clean && cd ..
+   npm run android
+   ```
+
+2. **iOS build issues**: Clean pods
+   ```bash
+   cd ios && rm -rf Pods && pod install && cd ..
+   ```
+
+3. **Firebase issues**: Ensure configuration files are properly placed and package names match
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
