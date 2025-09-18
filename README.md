@@ -33,7 +33,7 @@ The app includes the following screens:
 
 1. **Clone the repository**
    ```bash
-   git clone [<repository-url>](https://github.com/Jayeshkushwaha/daily-pulse-app.git)
+   git clone https://github.com/Jayeshkushwaha/daily-pulse-app.git
    cd MyNewReactNativeApp
    ```
 
