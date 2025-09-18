@@ -49,18 +49,6 @@ The app includes the following screens:
 
 4. **Firebase Setup**
    
-   **Quick Setup:**
-   ```bash
-   # Follow the detailed guide
-   open FIREBASE_SETUP.md
-   
-   # After downloading config files from Firebase Console, run:
-   ./setup-firebase-config.sh
-   
-   # Verify your setup
-   node verify-firebase-setup.js
-   ```
-   
    **Manual Setup:**
    - Create a new Firebase project at [Firebase Console](https://console.firebase.google.com)
    - Enable Authentication with Email/Password provider
@@ -68,8 +56,6 @@ The app includes the following screens:
    - Download `google-services.json` for Android and place it in `android/app/`
    - Download `GoogleService-Info.plist` for iOS and place it in `ios/MyNewReactNativeApp/`
    
-   📖 **See `FIREBASE_SETUP.md` for detailed step-by-step instructions**
-
 ## Running the App
 
 ### Android
